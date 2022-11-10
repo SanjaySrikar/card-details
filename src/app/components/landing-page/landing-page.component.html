@@ -1,0 +1,70 @@
+<div class="container font-space flex-row lg:flex h-screen w-screen">
+    <div class=" flex justify-end  bg-gradient-to-r  h-64 lg:h-full w-full from-dark-violet to-violet">
+        <img class="px-4 py-12 ml-36 " src="/assets/bg-card-back.png" alt="could not fetch">
+    </div>
+
+    <div class="middle">
+        <img class=" px-2   -mt-28 mr-10 h-36 " src="/assets/bg-card-front.png" alt="could not fetch">
+
+    </div>
+
+    <div class="bottom mt-20 px-2 py-2 flex justify-center items-center">
+
+
+        <form class="w-full max-h-full">
+            <div class="mb-4 mx-4 w-full">
+                <label class="block text-sm space-x-4 tracking-widest ">
+                    CARDHOLDER NAME
+                    <div class="py-2">
+                        <input type="text"
+                            class="block text-lg w-11/12 font-500 rounded-lg px-2 py-2 border border-r-1 border-light-gray-violet"
+                            placeholder="e.g. Jane Appleseed" name="cardholder name" id="name">
+                    </div>
+                </label>
+            </div>
+            <div class="mb-4 mx-4 w-full">
+                <label class="block text-sm space-x-4 tracking-widest  w-full">
+                    CARD NUMBER
+                    <div class="py-2">
+                        <input type="text"
+                            class="block text-lg w-11/12 font-500 rounded-lg px-2 py-2 border border-r-1 border-light-gray-violet"
+                            placeholder="e.g. 1234 5678 9123 000" name="card number" id="number">
+                    </div>
+                </label>
+            </div>
+
+            <div class="mb-8">
+                <div class="cvv and date flex justify-between space-x-0 ">
+                    <label class="block text-sm tracking-widest px-4">
+                        EXP. DATE (MM/YY)
+                        <div class="flex py-2 space-x-2">
+                            <input type="text"
+                                class="block text-lg w-20 font-500 rounded-lg px-1 py-2 border border-r-1 border-light-gray-violet"
+                                placeholder="MM" name="m" id="month" maxlength="2" size="2">
+                            <input type="text"
+                                class="block text-lg w-20 font-500 rounded-lg px-1 py-2 border border-r-1 border-light-gray-violet"
+                                placeholder="YY" name="y" id="year" maxlength="2" size="2">
+                        </div>
+                    </label>
+                    <label class="block text-sm tracking-widest px-1 ">
+                        CVC
+                        <div class="py-2">
+                            <input type="text"
+                                class="block text-lg w-11/12 font-500 rounded-lg px-1 ml-1 py-2 border border-r-1 border-light-gray-violet"
+                                placeholder="e.g. 123" name="cvc" id="cvc" maxlength="3">
+                        </div>
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="actions mx-3 text-center ">
+                <button class="border rounded-lg w-full text-white bg-violet py-3 ">
+                    Confirm
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
