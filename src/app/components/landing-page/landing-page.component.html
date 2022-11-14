@@ -1,53 +1,92 @@
-<div class="container font-space flex-row lg:flex lg:h-screen ">
+<div class="container font-space flex-row lg:flex lg:h-screen">
   <div class="lg:grid lg:grid-cols-2 lg:grid-row-1">
     <div
-      class=" flex justify-center
-        bg-gradient-to-br h-64 lg:h-full lg:w-1/2xl from-very-dark-violet via-violet to-very-dark-violet"
+      class="flex justify-center bg-gradient-to-br h-64 lg:h-full lg:w-1/2xl from-very-dark-violet via-violet to-very-dark-violet"
     >
       <img
-        class="px-4 py-12 lg:py-6 ml-12 lg:ml-[500px]  lg:mt-[370px]  lg:h-[260px] "
+        class="px-4 py-12 lg:py-6 ml-12 lg:ml-[500px] lg:mt-[370px] lg:h-[260px]"
         src="/assets/bg-card-back.png"
         alt="could not fetch"
       />
     </div>
 
-    <div class="middle ">
+    <div class="middle">
       <img
-        class="px-2 lg:z-10 lg:mt-40 -mt-28 mr-10 h-36 lg:-mx-72  lg:h-[220px]"
+        class="px-2 lg:z-10 lg:mt-40 -mt-28 mr-10 h-36 lg:-mx-72 lg:h-[220px]"
         src="/assets/bg-card-front.png"
         alt="could not fetch"
       />
     </div>
   </div>
 
-  <div class="bottom lg:w-9/12 mt-20 px-2 py-2 flex justify-center items-center">
-    <form class="w-full max-h-full">
+  <div
+    class="text-center font-space tracking-widest lg:mt-72 lg:w-[61rem]"
+    *ngIf="success"
+  >
+    <div class="lg:ml-[220px] lg:py-4 ml-[150px] py-2 mt-16">
+      <img  src="/assets/icon-complete.svg" alt="could not fetch" />
+    </div>
+
+    <p class="text-3xl text-dark-violet">THANK YOU!</p>
+    <p class="text-lg text-dark-gray-violet lg:px-2 lg:py-4 my-4">
+      We've added your card details
+    </p>
+    <button class="border rounded-lg lg:w-full w-[350px] my-4 text-white bg-violet py-3">
+      Confirm
+    </button>
+  </div>
+
+  <div
+    class="bottom lg:w-9/12 mt-20 px-2 py-2 flex justify-center items-center"
+    *ngIf="!success"
+  >
+    <form
+      [formGroup]="cardDetails"
+      class="w-full max-h-full"
+      (ngSubmit)="onSubmit(cardDetails.value)"
+    >
       <div class="mb-4 mx-4 w-full">
         <label class="block text-sm space-x-4 tracking-widest">
           CARDHOLDER NAME
           <div class="py-2">
             <input
+              [ngClass]="{
+                'border-b-red':
+                  submitted && this.cardDetails.controls['cardName'].errors
+              }"
               type="text"
+              s
+              formControlName="cardName"
               class="block text-lg w-11/12 font-500 rounded-lg px-2 py-2 border border-r-1 border-light-gray-violet"
               placeholder="e.g. Jane Appleseed"
-              name="cardholder name"
+              name="cardname"
               id="name"
+              required
             />
+            <span *ngIf="this.cardDetails.controls['cardName'].errors && submitted" class= "text-red">{{validation_messages[0].cardName}}</span>
           </div>
         </label>
       </div>
       <div class="mb-4 mx-4 w-full">
-        <label class="block text-sm space-x-4 tracking-widest w-full">
+        <label class="block text-sm space-x-4 tracking-widest">
           CARD NUMBER
           <div class="py-2">
             <input
+              [ngClass]="{
+                'border-b-red':
+                  submitted && this.cardDetails.controls['cardNumber'].errors
+              }"
               type="text"
+              formControlName="cardNumber"
+              maxlength="16"
               class="block text-lg w-11/12 font-500 rounded-lg px-2 py-2 border border-r-1 border-light-gray-violet"
               placeholder="e.g. 1234 5678 9123 000"
               name="card number"
               id="number"
             />
+            <span *ngIf="this.cardDetails.controls['cardNumber'].errors && submitted" class= "text-red">{{validation_messages[1].cardNumber}} </span>
           </div>
+
         </label>
       </div>
 
@@ -55,9 +94,14 @@
         <div class="cvv and date flex justify-between space-x-0">
           <label class="block text-sm tracking-widest px-4">
             EXP. DATE (MM/YY)
-            <div class="flex py-2 space-x-2">
+            <div class="flex py-2 space-x-2 ">
               <input
+                [ngClass]="{
+                  'border-b-red':
+                    submitted && this.cardDetails.controls['expiryMonth'].errors
+                }"
                 type="text"
+                formControlName="expiryMonth"
                 class="block text-lg w-20 font-500 rounded-lg px-1 py-2 border border-r-1 border-light-gray-violet"
                 placeholder="MM"
                 name="m"
@@ -65,28 +109,40 @@
                 maxlength="2"
                 size="2"
               />
+              <span *ngIf="this.cardDetails.controls['expiryMonth'].errors && submitted" class= "text-red">{{validation_messages[2].expiryMonth}}</span>
               <input
+                [ngClass]="{
+                  'border-b-red':
+                    submitted && this.cardDetails.controls['expiryYear'].errors
+                }"
                 type="text"
+                formControlName="expiryYear"
                 class="block text-lg w-20 font-500 rounded-lg px-1 py-2 border border-r-1 border-light-gray-violet"
                 placeholder="YY"
                 name="y"
                 id="year"
                 maxlength="2"
-                size="2"
               />
+              <span *ngIf="this.cardDetails.controls['expiryYear'].errors && submitted" class= "text-red">{{validation_messages[3].expiryYear}}</span>
             </div>
           </label>
           <label class="block text-sm tracking-widest px-1">
             CVC
             <div class="py-2">
               <input
+                [ngClass]="{
+                  'border-b-red':
+                    submitted && this.cardDetails.controls['cvc'].errors
+                }"
                 type="text"
+                formControlName="cvc"
                 class="block text-lg w-11/12 font-500 rounded-lg px-1 ml-1 py-2 border border-r-1 border-light-gray-violet"
                 placeholder="e.g. 123"
                 name="cvc"
                 id="cvc"
                 maxlength="3"
               />
+              <span *ngIf="this.cardDetails.controls['cvc'].errors && submitted" class= "text-red mx-2">{{validation_messages[4].cvc}}</span>
             </div>
           </label>
         </div>

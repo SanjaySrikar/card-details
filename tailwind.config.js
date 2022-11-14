@@ -27,7 +27,8 @@ module.exports = {
       'light-gray-violet': '#dedddf',
       'dark-gray-violet': '#8e8593',
       'very-dark-violet': '	#21092f',
-      'black' : '#000000'
+      'black' : '#000000',
+      'red' : '#8B0000'
     }
   },
   plugins: [
